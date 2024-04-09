@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import MapScreen from './screens/MapScreen';
-
+import HomeTab from './screens/HomeTab';
+import {NavigationContainer} from '@react-navigation/native'
 export default function App() {
   return (
-    <View style={styles.container}>
-      <MapScreen/>
-    </View>
+    <NavigationContainer>
+      <HomeTab/>
+    </NavigationContainer>
   );
 }
 
