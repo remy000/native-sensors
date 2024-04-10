@@ -22,8 +22,8 @@ const LightScreen = () => {
         };
       }, []);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Light Intensity: {light}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Light Intensity: {light}</Text>
     </View>
   )
 }
@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
     },
     text: {
       fontSize: 24,
+      fontWeight:'bold'
     },
   });

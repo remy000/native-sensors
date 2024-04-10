@@ -37,6 +37,12 @@ const HomeTab = () => {
       }}
     
     />
+     <Tab.Screen name='proximity' component={ProximityScreen}
+     options={{
+        headerShown: false,
+      }}
+    
+    />
 
     </Tab.Navigator>
   )

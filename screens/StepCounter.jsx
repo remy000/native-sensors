@@ -38,8 +38,8 @@ const StepCounter = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
-      <Text>Walk! And watch this go up: {currentStepCount}</Text>
+      <Text style={styles.text}>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
+      <Text style={styles.text}>Walk! And watch this go up: {currentStepCount}</Text>
     </View>
   );
 }
@@ -53,4 +53,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      text:{
+        fontSize:24
+      }
 })
