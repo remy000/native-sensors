@@ -38,7 +38,7 @@ const StepCounter = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
+      <Text style={styles.text}>Pedometer: {isPedometerAvailable}</Text>
       <Text style={styles.text}>Walk! And watch this go up: {currentStepCount}</Text>
     </View>
   );

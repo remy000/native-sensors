@@ -5,6 +5,7 @@ import MapScreen from './MapScreen';
 import ProximityScreen from './ProximityScreen';
 import LightScreen from './LightScreen';
 import StepCounter from './StepCounter';
+import CompassScreen from './CompassScreen';
 
 
 
@@ -37,7 +38,7 @@ const HomeTab = () => {
       }}
     
     />
-     <Tab.Screen name='proximity' component={ProximityScreen}
+     <Tab.Screen name='compass' component={CompassScreen}
      options={{
         headerShown: false,
       }}
