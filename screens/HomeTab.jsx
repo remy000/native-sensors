@@ -44,6 +44,7 @@ const HomeTab = () => {
       }}
     
     />
+   
 
     </Tab.Navigator>
   )

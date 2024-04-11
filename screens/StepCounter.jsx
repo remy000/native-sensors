@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {Pedometer} from 'expo-sensors'
 
@@ -40,6 +40,11 @@ const StepCounter = () => {
     <View style={styles.container}>
       <Text style={styles.text}>Pedometer: {isPedometerAvailable}</Text>
       <Text style={styles.text}>Walk! And watch this go up: {currentStepCount}</Text>
+      <Image
+        source={require('../assets/walk.gif')} // Change the path to your image file
+        style={styles.image}
+        resizeMode="contain"
+      />
     </View>
   );
 }
@@ -52,8 +57,14 @@ const styles = StyleSheet.create({
         marginTop: 15,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor:'white'
       },
       text:{
         fontSize:24
-      }
+      },
+      image: {
+        marginTop:50,
+        width: 200, // Adjust the size of the image as needed
+        height: 200,
+      },
 })

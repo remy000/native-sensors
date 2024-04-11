@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {LightSensor} from'expo-sensors'
+import Svg, { Circle, Path } from 'react-native-svg';
 const LightScreen = () => {
     const [light, setLight] = useState(null);
     useEffect(() => {
@@ -21,9 +22,15 @@ const LightScreen = () => {
           LightSensor.removeAllListeners();
         };
       }, []);
+      const opacity = light ? light / 1000 : 0;
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Light Intensity: {light}</Text>
+      <Image
+        source={require('../assets/fire.jpg')} // Change the path to your image file
+        style={[styles.image, { opacity }]}
+        resizeMode="contain"
+      />
     </View>
   )
 }
@@ -37,7 +44,11 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     text: {
-      fontSize: 24,
+      fontSize: 18,
       fontWeight:'bold'
+    },
+    image: {
+      width: 100, // Adjust the size of the image as needed
+      height: 200,
     },
   });

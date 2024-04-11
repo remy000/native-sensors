@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {Magnetometer} from 'expo-sensors'
 import { FontAwesome } from '@expo/vector-icons';
+
 const CompassScreen = () => {
   const [heading,setHeading]=useState(0);
   useEffect(()=>{
@@ -34,8 +35,12 @@ const CompassScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Heading: {heading}°</Text>
-      <FontAwesome name="compass" size={60} color="black" style={{ transform: [{ rotate: `${heading}deg` }] }} />
+      <Text style={styles.text}>Heading: {heading.toFixed(2)}°</Text>
+      <Image
+        source={require('../assets/compass3.webp')} // Change the path to your image file
+        style={[styles.image, { transform: [{ rotate: `${heading}deg` }] }]}
+        resizeMode="contain"
+      />
     </View>
   );
   
@@ -48,8 +53,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'white'
   },
   text: {
     fontSize: 24,
+  },
+  image: {
+    marginTop:50,
+    width: 200, // Adjust the size of the image as needed
+    height: 200,
   },
 })
