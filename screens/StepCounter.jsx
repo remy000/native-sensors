@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {Pedometer} from 'expo-sensors'
 
 const StepCounter = () => {
-    const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
+  const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [currentStepCount, setCurrentStepCount] = useState(0);
   const [subscription, setSubscription] = useState(null);
 
@@ -41,7 +41,7 @@ const StepCounter = () => {
       <Text style={styles.text}>Pedometer: {isPedometerAvailable}</Text>
       <Text style={styles.text}>Walk! And watch this go up: {currentStepCount}</Text>
       <Image
-        source={require('../assets/walk.gif')} // Change the path to your image file
+        source={require('../assets/walk.gif')}
         style={styles.image}
         resizeMode="contain"
       />
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
       },
       image: {
         marginTop:50,
-        width: 200, // Adjust the size of the image as needed
+        width: 200,
         height: 200,
       },
 })

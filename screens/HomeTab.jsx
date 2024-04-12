@@ -6,7 +6,7 @@ import ProximityScreen from './ProximityScreen';
 import LightScreen from './LightScreen';
 import StepCounter from './StepCounter';
 import CompassScreen from './CompassScreen';
-
+import { MaterialIcons,Foundation,Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 
 
 const Tab=createBottomTabNavigator();
@@ -22,24 +22,38 @@ const HomeTab = () => {
     >
     <Tab.Screen name='Map' component={MapScreen}
      options={{
+      tabBarIcon:()=>{
+        <MaterialIcons name="gps-fixed" size={30} color="black" />
+
+      },
         headerShown: false,
       }}
     
     />
     <Tab.Screen name='Light' component={LightScreen}
      options={{
+      tabBarIcon:()=>{
+        <Foundation name="lightbulb" size={24} color="black" />
+
+      },
         headerShown: false,
       }}
     
     />
     <Tab.Screen name='Pedometer' component={StepCounter}
      options={{
+      tabBarIcon:()=>{
+        <Ionicons name="walk" size={30} color="black" />
+      },
         headerShown: false,
       }}
     
     />
      <Tab.Screen name='compass' component={CompassScreen}
      options={{
+      tabBarIcon:()=>{
+        <MaterialCommunityIcons name="compass-rose" size={30} color="black" />
+      },
         headerShown: false,
       }}
     
