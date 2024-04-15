@@ -22,39 +22,35 @@ const HomeTab = () => {
     >
     <Tab.Screen name='Map' component={MapScreen}
      options={{
-      tabBarIcon:()=>{
-        <MaterialIcons name="gps-fixed" size={30} color="black" />
+      tabBarIcon:()=>(
+        <MaterialIcons name="gps-fixed" size={26} color="black" />
 
-      },
-        headerShown: false,
+      ),
       }}
     
     />
     <Tab.Screen name='Light' component={LightScreen}
      options={{
-      tabBarIcon:()=>{
+      tabBarIcon:()=>(
         <Foundation name="lightbulb" size={24} color="black" />
 
-      },
-        headerShown: false,
+      ),
       }}
     
     />
     <Tab.Screen name='Pedometer' component={StepCounter}
      options={{
-      tabBarIcon:()=>{
-        <Ionicons name="walk" size={30} color="black" />
-      },
-        headerShown: false,
+      tabBarIcon:()=>(
+        <Ionicons name="walk" size={24} color="black" />
+      ),
       }}
     
     />
      <Tab.Screen name='compass' component={CompassScreen}
      options={{
-      tabBarIcon:()=>{
+      tabBarIcon:()=>(
         <MaterialCommunityIcons name="compass-rose" size={30} color="black" />
-      },
-        headerShown: false,
+      ),
       }}
     
     />
