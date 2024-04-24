@@ -60,7 +60,9 @@ const styles = StyleSheet.create({
         backgroundColor:'white'
       },
       text:{
-        fontSize:24
+        fontSize:24,
+        lineHeight:30,
+        fontWeight:'bold'
       },
       image: {
         marginTop:50,
