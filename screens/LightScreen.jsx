@@ -38,7 +38,6 @@ const LightScreen = () => {
       const handleLightLevelChange = (brightness) => {
         if (brightness < 100) {
           Brightness.setSystemBrightnessAsync(brightness/10);
-          // Dim lights or trigger low light notification
           // Alert.alert('Low Light Detected', 'Consider turning on lights for better visibility');
         } else if (brightness > 1000) {
           Brightness.setSystemBrightnessAsync(1);
