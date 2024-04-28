@@ -1,34 +1,44 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {LightSensor} from'expo-sensors'
 import Svg, { Circle, Path } from 'react-native-svg';
 const LightScreen = () => {
     const [light, setLight] = useState(null);
+
     useEffect(() => {
-        const getLightData = async () => {
-          try {
-            LightSensor.setUpdateInterval(1000); // Update interval in milliseconds
-            LightSensor.addListener((data) => {
-              setLight(data.illuminance);
-            });
-          } catch (error) {
-            console.log('Light sensor is not available on this device');
-          }
-        };
-    
-        getLightData();
-    
-        return () => {
-          LightSensor.removeAllListeners();
-        };
-      }, []);
-      const opacity = light ? light / 1000 : 0;
+      const getLightData = async () => {
+        try {
+          LightSensor.setUpdateInterval(1000); // Update interval in milliseconds
+          LightSensor.addListener((data) => {
+            setLight(data.illuminance);
+            handleLightLevelChange(data.illuminance);
+          });
+        } catch (error) {
+          console.log('Light sensor is not available on this device');
+        }
+      };
+  
+      getLightData();
+  
+      return () => {
+        LightSensor.removeAllListeners();
+      };
+    }, []);
+      const handleLightLevelChange = (brightness) => {
+        if (brightness < 100) {
+          // Dim lights or trigger low light notification
+          Alert.alert('Low Light Detected', 'Consider turning on lights for better visibility');
+        } else if (brightness > 1000) {
+          // Increase lights or trigger high light notification
+          Alert.alert('High Light Detected', 'Consider adjusting lights for comfort');
+        }
+      };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Light Intensity: {light}</Text>
       <Image
         source={require('../assets/fire.jpg')} // Change the path to your image file
-        style={[styles.image, { opacity }]}
+        style={[styles.image, { opacity: light ? light / 1000 : 0 }]}
         resizeMode="contain"
       />
     </View>
