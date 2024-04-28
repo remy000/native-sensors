@@ -2,6 +2,9 @@ import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {LightSensor} from'expo-sensors'
 import Svg, { Circle, Path } from 'react-native-svg';
+import * as Brightness from 'expo-brightness';
+
+
 const LightScreen = () => {
     const [light, setLight] = useState(null);
 
@@ -24,13 +27,23 @@ const LightScreen = () => {
         LightSensor.removeAllListeners();
       };
     }, []);
+    useEffect(() => {
+      (async () => {
+        const { status } = await Brightness.requestPermissionsAsync();
+        if (status === 'granted') {
+          Brightness.setSystemBrightnessAsync(1);
+        }
+      })();
+    }, []);
       const handleLightLevelChange = (brightness) => {
         if (brightness < 100) {
+          Brightness.setSystemBrightnessAsync(brightness/10);
           // Dim lights or trigger low light notification
-          Alert.alert('Low Light Detected', 'Consider turning on lights for better visibility');
+          // Alert.alert('Low Light Detected', 'Consider turning on lights for better visibility');
         } else if (brightness > 1000) {
+          Brightness.setSystemBrightnessAsync(1);
           // Increase lights or trigger high light notification
-          Alert.alert('High Light Detected', 'Consider adjusting lights for comfort');
+          // Alert.alert('High Light Detected', 'Consider adjusting lights for comfort');
         }
       };
   return (
