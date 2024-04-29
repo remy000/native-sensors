@@ -45,11 +45,11 @@ const CompassScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Heading: {heading.toFixed(2)}°</Text>
-      <Text style={styles.directionText}>{getDirection(heading)}</Text>
+      <Text style={styles.text}>Heading: {getDirection(heading)}</Text>
+      <Text style={styles.directionsText}> {heading.toFixed(2)}°</Text>
       <Image
         source={require('../assets/compass3.webp')} // Change the path to your image file
-        style={[styles.image, { transform: [{ rotate: `${heading}deg` }] }]}
+        style={[styles.image, { transform: [{ rotate: `-${heading}deg` }] }]}
         resizeMode="contain"
       />
       
