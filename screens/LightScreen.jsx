@@ -1,20 +1,22 @@
-import { Alert, Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {LightSensor} from'expo-sensors'
-import Svg, { Circle, Path } from 'react-native-svg';
 import * as Brightness from 'expo-brightness';
-
+import {LineChart} from 'react-native-chart-kit'
 
 const LightScreen = () => {
-    const [light, setLight] = useState(null);
+    const [light, setLight] = useState(0);
+    const [data, setData] = useState({ labels: [], datasets: [{ data: [] }] });
+    const MAX_DATA_POINTS = 4;
 
     useEffect(() => {
       const getLightData = async () => {
         try {
-          LightSensor.setUpdateInterval(1000); // Update interval in milliseconds
+          LightSensor.setUpdateInterval(1000);
           LightSensor.addListener((data) => {
             setLight(data.illuminance);
             handleLightLevelChange(data.illuminance);
+            updateChartData(data.illuminance);
           });
         } catch (error) {
           console.log('Light sensor is not available on this device');
@@ -41,18 +43,50 @@ const LightScreen = () => {
           // Alert.alert('Low Light Detected', 'Consider turning on lights for better visibility');
         } else if (brightness > 1000) {
           Brightness.setSystemBrightnessAsync(1);
-          // Increase lights or trigger high light notification
           // Alert.alert('High Light Detected', 'Consider adjusting lights for comfort');
         }
       };
+
+      const updateChartData = (lightIntensity) => {
+        const currentTime = new Date().toLocaleTimeString();
+        setData((prevData) => {
+          const newLabels = [...prevData.labels, currentTime].slice(-MAX_DATA_POINTS);
+          const newData = [...prevData.datasets[0].data, lightIntensity].slice(-MAX_DATA_POINTS);
+          return {
+            labels: newLabels,
+            datasets: [{ data: newData }],
+          };
+        });
+      };
+
+
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Light Intensity: {light}</Text>
-      <Image
-        source={require('../assets/fire.jpg')} // Change the path to your image file
-        style={[styles.image, { opacity: light ? light / 1000 : 0 }]}
+       <Image
+        source={require('../assets/light.jpg')}
+        style={styles.image}
         resizeMode="contain"
       />
+      <Text style={styles.text}>Light Intensity: {light.toFixed(3)}</Text>
+     
+      <LineChart
+        data={data}
+        width={Dimensions.get('window').width - 50} 
+        height={250}
+        yAxisSuffix=" lux"
+        chartConfig={{
+          backgroundGradientFrom: '#add8e6',
+          backgroundGradientTo: '#add8e6',
+          decimalPlaces: 0,
+          color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
+          style: { borderRadius: 16 },
+        }}
+        bezier
+        style={styles.chart}
+        xLabelsOffset={-2} 
+/>
     </View>
   )
 }
@@ -63,14 +97,20 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor:'white'
     },
     text: {
       fontSize: 18,
-      fontWeight:'bold'
+      fontWeight:'bold',
+      marginTop:10,
+      color:'blue'
     },
     image: {
-      width: 100, // Adjust the size of the image as needed
+      width: 200, 
       height: 200,
+   },
+    chart: {
+      marginVertical: 30,
+      borderRadius: 20,
     },
   });
