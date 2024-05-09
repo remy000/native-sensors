@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Pedometer, Accelerometer } from 'expo-sensors';
-import { LineChart, BarChart } from 'react-native-chart-kit';
+import { LineChart, ProgressChart } from 'react-native-chart-kit';
 
 const StepCounter = () => {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
@@ -81,7 +81,8 @@ const StepCounter = () => {
       <Text style={styles.text}>Walk! And watch this go up: {currentStepCount}</Text>
       <View style={styles.chartContainer}>
         <Text style={styles.chartTitle}>Step Count Chart</Text>
-        <LineChart
+        {stepChartData.length>0&&(
+          <LineChart
           data={{
             labels: Array.from({ length: stepChartData.length }, (_, i) => (i + 1).toString()),
             datasets: [{ data: stepChartData }]
@@ -91,18 +92,29 @@ const StepCounter = () => {
           chartConfig={chartConfig}
           bezier
         />
+
+        )}
+        
       </View>
       <View style={styles.chartContainer}>
         <Text style={styles.chartTitle}>Motion Detection Chart</Text>
-        <BarChart
-          data={{
-            labels: Array.from({ length: motionChartData.length }, (_, i) => (i + 1).toString()),
-            datasets: [{ data: motionChartData }]
-          }}
-          width={320}
-          height={200}
-          chartConfig={chartConfig}
-        />
+        {motionChartData.length>0&&(
+            <ProgressChart
+            data={{
+              labels: Array.from({ length: motionChartData.length }, (_, i) => (i + 1).toString()),
+              data: motionChartData.map((value, index) => ({ value })),
+            }}
+            width={320}
+            height={200}
+            chartConfig={{
+              backgroundGradientFrom: '#90EE90',
+              backgroundGradientTo: '#50C878',
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            }}
+          />
+
+        )}
+        
       </View>
       
     </View>
