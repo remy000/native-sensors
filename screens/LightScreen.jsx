@@ -64,30 +64,31 @@ const LightScreen = () => {
 
   return (
     <View style={styles.container}>
-       <Image
-        source={require('../assets/light.jpg')}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <Text style={styles.text}>Light Intensity: {light.toFixed(3)}</Text>
-     
-      <LineChart
-        data={data}
-        width={Dimensions.get('window').width - 50} 
-        height={250}
-        yAxisSuffix=" lux"
-        chartConfig={{
-          backgroundGradientFrom: '#add8e6',
-          backgroundGradientTo: '#add8e6',
-          decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
-          style: { borderRadius: 16 },
-        }}
-        bezier
-        style={styles.chart}
-        xLabelsOffset={-2} 
-/>
-    </View>
+  <Image
+    source={require('../assets/light.jpg')}
+    style={styles.image}
+    resizeMode="contain"
+  />
+  <Text style={styles.text}>Light Intensity: {light.toFixed(3)}</Text>
+  {data && data.labels.length > 0 && (
+    <LineChart
+      data={data}
+      width={Dimensions.get('window').width - 50} 
+      height={250}
+      yAxisSuffix=" lux"
+      chartConfig={{
+        backgroundGradientFrom: '#add8e6',
+        backgroundGradientTo: '#add8e6',
+        decimalPlaces: 0,
+        color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
+        style: { borderRadius: 16 },
+      }}
+      bezier
+      style={styles.chart}
+      xLabelsOffset={-2} 
+    />
+  )}
+</View>
   )
 }
 

@@ -28,7 +28,7 @@ const StepCounter = () => {
 
   const handleMotionDetection = ({ x, y, z }) => {
     const acceleration = Math.sqrt(x ** 2 + y ** 2 + z ** 2);
-    const threshold = 10;
+    const threshold = 2;
     if (acceleration > threshold) {
       setIsMotionDetected(true);
       alert('Motion Detected');
@@ -90,7 +90,7 @@ const StepCounter = () => {
           width={320}
           height={200}
           chartConfig={chartConfig}
-          bezier
+        
         />
 
         )}
@@ -102,10 +102,12 @@ const StepCounter = () => {
             <ProgressChart
             data={{
               labels: Array.from({ length: motionChartData.length }, (_, i) => (i + 1).toString()),
-              data: motionChartData.map((value, index) => ({ value })),
+              data: motionChartData.map(value => value / 100), // Scale data to be between 0 and 1 for ProgressChart
             }}
             width={320}
             height={200}
+            strokeWidth={16}
+            radius={32}
             chartConfig={{
               backgroundGradientFrom: '#90EE90',
               backgroundGradientTo: '#50C878',
